@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "workspace:validate": "node scripts/workspace-validate.mjs"
+    "workspace:validate": "node scripts/workspace-validate.mjs",
+    "workspace:health": "node scripts/workspace-health.mjs"
   },
   "devDependencies": {
     "yaml": "^2.8.1"
