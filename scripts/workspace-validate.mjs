@@ -54,6 +54,16 @@ function validateProject(project) {
     if (git(projectPath, ['status', '--porcelain']) !== '') {
       issues.push('working tree has uncommitted changes');
     }
+
+    const packagePath = path.join(projectPath, 'package.json');
+    const packageJson = JSON.parse(readFileSync(packagePath, 'utf8'));
+    const declaredScripts = project.development?.npm_scripts ?? {};
+
+    for (const [purpose, scriptName] of Object.entries(declaredScripts)) {
+      if (typeof scriptName !== 'string' || !packageJson.scripts?.[scriptName]) {
+        issues.push(`missing npm script for ${purpose}: ${scriptName}`);
+      }
+    }
   } catch (error) {
     const details = error.stderr?.toString().trim();
     issues.push(details || error.message);
@@ -65,8 +75,16 @@ function validateProject(project) {
 console.log(`Validating ${manifest.workspace?.name ?? 'workspace'}\n`);
 
 let valid = true;
+const projectNames = new Set(manifest.projects.map((project) => project.name));
+
 for (const project of manifest.projects) {
   const issues = validateProject(project);
+
+  for (const dependency of project.depends_on ?? []) {
+    if (!projectNames.has(dependency)) {
+      issues.push(`declares an unknown dependency: ${dependency}`);
+    }
+  }
 
   if (issues.length === 0) {
     console.log(`✓ ${project.name} (${project.role})`);

@@ -8,9 +8,29 @@ projects:
     path: projects/vicx-backend
     repository: https://github.com/vicx074/vicx-backend.git
     integration_branch: main
+    stack:
+      - Node.js
+      - HTTP API
+    development:
+      port: 3000
+      health_url: http://localhost:3000/health
+      npm_scripts:
+        start: start
+        test: test
 
   - name: vicx-frontend
     role: frontend
     path: projects/vicx-frontend
     repository: https://github.com/vicx074/vicx-frontend.git
     integration_branch: main
+    stack:
+      - React
+      - TypeScript
+      - Vite
+    depends_on:
+      - vicx-backend
+    development:
+      port: 5173
+      npm_scripts:
+        dev: dev
+        build: build
