@@ -1,0 +1,12 @@
+{
+  "name": "meta-repo-study",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "workspace:validate": "node scripts/workspace-validate.mjs"
+  },
+  "devDependencies": {
+    "yaml": "^2.8.1"
+  }
+}
