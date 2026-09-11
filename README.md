@@ -11,3 +11,15 @@ mantendo documentação, contexto e instruções compartilhadas.
 
 - Backend
 - Frontend
+
+## Comandos do workspace
+
+```powershell
+npm.cmd install
+npm.cmd run workspace:bootstrap
+npm.cmd run workspace:validate
+npm.cmd run workspace:health
+```
+
+Use `npm.cmd run workspace:bootstrap -- --dry-run` para visualizar quais
+repositórios seriam clonados antes de alterar o disco.

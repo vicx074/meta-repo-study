@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "workspace:validate": "node scripts/workspace-validate.mjs",
-    "workspace:health": "node scripts/workspace-health.mjs"
+    "workspace:health": "node scripts/workspace-health.mjs",
+    "workspace:bootstrap": "node scripts/workspace-bootstrap.mjs"
   },
   "devDependencies": {
     "yaml": "^2.8.1"
